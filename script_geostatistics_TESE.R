@@ -1,6 +1,6 @@
 #Carregar pacotes necesarios##
 require(raster)
-require(dplyr)
+require(dplyr)1
 require(ggplot2)
 library(gridExtra)
 library(sp)
@@ -75,7 +75,7 @@ plot(sand_exp5, SandS2MSI.vgm)
 SandL8OLI.vgm
 SandS2MSI.vgm
 
-{#Validação cruzada
+{#ValidaÃ§Ã£o cruzada
 ##Experimental#
 xvalid.exp <- krige.cv(sandSEN ~ 1, locations = data.SYSIs, model = vgm1)
 plot(xvalid.exp$var1.pred ~ data.SYSIs$SandSYSI, cex = 1.2, lwd = 2, ylim=c(0,950))
