@@ -95,7 +95,7 @@ val_rows <- sample(nrow(dat1), 685)
 
 
 ###Split dataset and covariates into training and validation sets###
-dat1_train <- dat1[-val_rows, ]   #dat3 corresponds to the data loaded in R (all of it)
+dat1_train <- dat1[-val_rows, ]   #dat1 corresponds to the data loaded in R (all of it)
 covariates_train <- dat1[-val_rows, ]  #The SYSI.cov data contains six columns corresponding to the SYSI vis-NIR-SWIR bands
 
 dat1_test <- dat1[val_rows, ]
@@ -104,7 +104,7 @@ covariates_test <- SYSI.covs[val_rows, ]
 
 ###Fit a cubist model to your data  ---  Example for clay content and SYSI Combined --- Repit for the remaining soil properties and covariates###
 ##The hyperparameters committees and neighbors were used by default. No hyperparameters were tunned##
-clay.fit <- train(x = covariates_train[,1:6], y = dat3_train$OM, method = "cubist", trControl = trainControl(method = "cv"))
+clay.fit <- train(x = covariates_train[,1:6], y = dat1_train$Clay, method = "cubist", trControl = trainControl(method = "cv"))
 summary(clay.fit)   ##to see the models and rules created
 clay.fit            ##to see the performance of the models
 
@@ -113,7 +113,7 @@ predicted.clay.test <- predict(clay.fit, covariates_test[,1:6])  ##validation
 
 
 ##Performance of validation set
-goof(dat3_test$clay, predicted.clay.test, type="spec")
+goof(dat1_test$clay, predicted.clay.test, type="spec")
 
 
 ###Predict to the entire study area using the raster covariates###
